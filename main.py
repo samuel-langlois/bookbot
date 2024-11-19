@@ -11,8 +11,13 @@ def WordCounter():
     with open(path_to_file) as f:
         file_contents = f.read()
     #replaced = file_contents.replace("--"," ")
-    count = len(replaced.split())
+    count = len(file_contents.split(" "))
     return count
+
+def SortChars(charMap):
+    return sorted(charMap.items(), 
+    key=lambda item:item[1], reverse=True)
+
 def CharCounter():
     count = 0
     countCharacters = {
@@ -28,8 +33,11 @@ def CharCounter():
     for char in lowerCase:
         if char in countCharacters:
             countCharacters[char] += 1
-
+    countCharacters = SortChars(countCharacters)
     return countCharacters
+dictOfChar = CharCounter()
+print(f"--- Begin report of books/frankenstein.txt --- {WordCounter()} words found in the document")
 
-
-print(CharCounter())
+for key,val in dictOfChar:
+    print(f"The'{key}' character was found {val} times")
+print("--- End report ---")
